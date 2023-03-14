@@ -1,0 +1,15 @@
+article {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .tcard {
+    width: 32%;
+    padding-bottom: 2%;
+    margin-bottom: 2%;
+    position: relative;
+    background-color: lightslategray;
+    &:nth-child(odd) {
+      background-color: lightsteelblue;
+    }
+  }
+}

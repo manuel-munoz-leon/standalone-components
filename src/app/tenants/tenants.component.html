@@ -1,0 +1,16 @@
+<h2>Tenants</h2>
+
+<article *ngIf="apis$ | async as apis">
+  <mat-card class="tcard" *ngFor="let api of apis">
+    <mat-card-header>
+      <mat-card-title>{{ api.API }}</mat-card-title>
+      <mat-card-subtitle>{{ api.Category }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ api.Description }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+</article>
