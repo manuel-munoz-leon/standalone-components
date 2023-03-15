@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { map, Observable } from 'rxjs';
 import { GenericService } from '../generic.service';
 
@@ -20,6 +23,9 @@ export interface Api {
   selector: 'app-tenants',
   templateUrl: './tenants.component.html',
   styleUrls: ['./tenants.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgIf, AsyncPipe, NgFor, MatCardModule, MatProgressBarModule],
 })
 export class TenantsComponent {
   apis$: Observable<Api[]> = this.genericService

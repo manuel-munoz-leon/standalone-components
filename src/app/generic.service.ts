@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, EMPTY, Observable } from 'rxjs';
+import { catchError, EMPTY, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +15,9 @@ export class GenericService {
         return EMPTY;
       })
     );
-    9;
+  }
+
+  isAuthorized(): Observable<boolean> {
+    return of(true);
   }
 }

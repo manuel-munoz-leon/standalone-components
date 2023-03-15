@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MatTableModule } from '@angular/material/table';
 
 export interface PeriodicElement {
   name: string;
@@ -24,6 +25,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [MatTableModule],
 })
 export class UsersComponent {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
