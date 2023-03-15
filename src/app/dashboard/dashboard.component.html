@@ -1,0 +1,34 @@
+<h2>dashboard</h2>
+
+<section>
+  <article>
+    <h3>The Mental Model</h3>
+    <p>
+      The underlying mental model helps to better understand Standalone
+      Components. In general, you can imagine a Standalone Component as a
+      component with its very own NgModule
+    </p>
+  </article>
+  <article>
+    <h3>Replace Angular Modules with Barrels</h3>
+    <p>Barrels are EcmaScript files that (re)export related building blocks</p>
+  </article>
+  <article>
+    <h3>Lazy Loading with Standalone Components</h3>
+    <p>
+      n the past, a lazy route pointed to an NgModule with child routes. As
+      there are no NgModules anymore, loadChildren can now directly point to a
+      lazy routing configuration
+    </p>
+  </article>
+  <article>
+    <h3>Using Router Directives</h3>
+    <p>
+      After setting up the routes, we also need to define a placeholder where
+      the Router displays the activated component and links for switching
+      between them. To get the directives needed for this, you might directly
+      import the RouterModule into your Standalone Component. However, a better
+      alternative is to just import the directives you need
+    </p>
+  </article>
+</section>
