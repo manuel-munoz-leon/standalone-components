@@ -20,7 +20,6 @@ const port = 3000;
  */
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// https://angular.io/generated/images/marketing/concept-icons/material.png
 
 let rawdata = fs.readFileSync("config.json");
 let config = JSON.parse(rawdata);
