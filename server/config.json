@@ -1,0 +1,12 @@
+{
+  "apiUrl": "https://dog.ceo/api/breeds/image/random",
+  "posterImg": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Angular_full_color_logo.svg/2048px-Angular_full_color_logo.svg.png",
+  "secret": "staging-secret",
+  "theme": "staging-theme",
+  "credentials": {
+    "user": "Manu Munoz",
+    "pass": "ngTalk-3",
+    "keyId": "1234",
+    "region": "cr-west-2"
+  }
+}
