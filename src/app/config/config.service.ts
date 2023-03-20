@@ -46,7 +46,6 @@ export class ConfigService {
       catchError((error) => {
         // if in error, return set fall back from environment
         console.warn('Error loading config ', error);
-        this.createConfig(Config, true);
         return of(false);
       })
     );
