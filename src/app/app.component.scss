@@ -26,10 +26,6 @@ p {
 }
 
 .toolbar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
   height: 60px;
   display: flex;
   align-items: center;
@@ -43,7 +39,7 @@ p {
 }
 
 .content {
-  margin: 82px auto 32px;
+  margin: 20px auto 32px;
   padding: 0 16px;
 }
 
