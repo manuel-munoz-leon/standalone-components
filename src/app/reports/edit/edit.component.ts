@@ -12,5 +12,4 @@ import { FormsModule } from '@angular/forms';
 })
 export class EditComponent {
   isChecked = false;
-  constructor() {}
 }
