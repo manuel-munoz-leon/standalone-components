@@ -4,6 +4,8 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf, AsyncPipe } from '@angular/common';
+import { EventBusService } from './event-bus.service';
+import { Notifications } from './notifications';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -23,6 +25,18 @@ import { NgIf, AsyncPipe } from '@angular/common';
 })
 export class AppComponent {
   title = 'standalone';
+  counter = 0;
+  toggleView$ = this.eventService.toggleView$;
+  interval = setInterval(() => this.addNotifications(), 1000);
 
-  constructor() {}
+  constructor(private eventService: EventBusService) {}
+
+  addNotifications(): void {
+    this.eventService.pushNotification(Notifications[this.counter]);
+    console.log(this.counter);
+    this.counter += 1;
+    if (this.counter >= 12) {
+      clearInterval(this.interval);
+    }
+  }
 }

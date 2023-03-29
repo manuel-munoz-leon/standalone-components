@@ -1,1 +1,19 @@
-<p>details works!</p>
+<h1>Details</h1>
+
+<button (click)="addMore()">Add Extra</button>
+
+<ng-container *ngIf="notifications$ | async">
+  <h3>
+    Notifications
+    <mat-icon
+      fontIcon="email"
+      [matBadge]="Data.length"
+      matBadgeColor="primary"
+    ></mat-icon>
+  </h3>
+
+  <div *ngFor="let noti of Data">
+    <span>{{ noti.name }}</span> | <small>{{ noti.date }}</small>
+    <p>{{ noti.message }}</p>
+  </div>
+</ng-container>

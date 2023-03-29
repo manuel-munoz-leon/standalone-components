@@ -1,11 +1,19 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
+import { CommonModule, AsyncPipe, JsonPipe } from '@angular/common';
+import { ConfigService } from 'src/app/config/config.service';
+import { EventBusService } from '../../event-bus.service';
 @Component({
   selector: 'app-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AsyncPipe, JsonPipe],
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss'],
 })
-export class ListComponent {}
+export class ListComponent {
+  config$ = this.configService.config$;
+  notifications$ = this.eventService.notifications$;
+  constructor(
+    private configService: ConfigService,
+    private eventService: EventBusService
+  ) {}
+}

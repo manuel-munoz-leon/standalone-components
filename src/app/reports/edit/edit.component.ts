@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule } from '@angular/forms';
+import { EventBusService } from '../../event-bus.service';
 
 @Component({
   selector: 'app-edit',
@@ -12,5 +13,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class EditComponent {
   isChecked = false;
-  constructor() {}
+  constructor(private eventService: EventBusService) {}
+
+  toogleView(event: boolean): void {
+    console.log(`Toggle value: ${event}`);
+    this.eventService.toggleMobileView(event);
+  }
 }

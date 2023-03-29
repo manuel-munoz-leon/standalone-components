@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 import { map } from 'rxjs/internal/operators/map';
 import { environment } from 'src/environments/environment';
 import { Config } from './config';
+import { BehaviorSubject } from 'rxjs';
 
 export type AppConfig = {
   isServed: boolean;
@@ -22,19 +23,15 @@ export type AppConfig = {
   providedIn: 'root',
 })
 export class ConfigService {
+  configSub = new BehaviorSubject<AppConfig>(Config);
+  config$: Observable<AppConfig> = this.configSub.asObservable();
+
   private static _config: AppConfig;
   static get Config(): AppConfig {
     return this._config || Config;
   }
 
   constructor(private http: HttpClient) {}
-
-  createConfig(config: unknown, errors: boolean): void {
-    const _config = { ...Config, ...(<AppConfig>config) };
-    _config.isServed = true;
-    _config.withError = errors;
-    ConfigService._config = _config;
-  }
 
   loadConfig(): Observable<boolean> {
     return this.http.get<AppConfig>(environment.configUrl).pipe(
@@ -49,5 +46,13 @@ export class ConfigService {
         return of(false);
       })
     );
+  }
+
+  createConfig(config: unknown, errors: boolean): void {
+    const _config = { ...Config, ...(<AppConfig>config) };
+    _config.isServed = true;
+    _config.withError = errors;
+    ConfigService._config = _config;
+    this.configSub.next(_config);
   }
 }

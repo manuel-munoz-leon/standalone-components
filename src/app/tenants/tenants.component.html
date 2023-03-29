@@ -1,6 +1,6 @@
 <h2>Tenants</h2>
 
-<article *ngIf="apis$ | async as apis; else loader">
+<article *ngIf="cache$ | async as apis; else loader">
   <mat-card class="tcard" *ngFor="let api of apis">
     <mat-card-header>
       <mat-card-title>{{ api.API }}</mat-card-title>

@@ -1,3 +1,5 @@
 <h2>Edit View</h2>
 
-<mat-slide-toggle [(ngModel)]="isChecked">Toggle Mobile View</mat-slide-toggle>
+<mat-slide-toggle (ngModelChange)="toogleView($event)" [(ngModel)]="isChecked"
+  >Toggle Mobile View</mat-slide-toggle
+>

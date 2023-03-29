@@ -4,6 +4,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { map, Observable } from 'rxjs';
 import { GenericService } from '../generic.service';
+import { CacheService } from '../cache.service';
 
 type Entries = {
   count: number;
@@ -32,5 +33,12 @@ export class TenantsComponent {
     .fetchData<Entries>('https://api.publicapis.org/entries')
     .pipe(map((data: Entries) => data.entries.splice(0, 15)));
 
-  constructor(private genericService: GenericService) {}
+  cache$: Observable<Api[]> = this.cache
+    .getResource('https://api.publicapis.org/entries')
+    .pipe(map((data: Entries) => data.entries.splice(0, 15)));
+
+  constructor(
+    private genericService: GenericService,
+    private cache: CacheService
+  ) {}
 }
