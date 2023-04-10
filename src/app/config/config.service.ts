@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
 import { catchError } from 'rxjs/internal/operators/catchError';
@@ -22,6 +23,9 @@ export type AppConfig = {
   providedIn: 'root',
 })
 export class ConfigService {
+  configSub = new BehaviorSubject<AppConfig>(Config);
+  config$ = this.configSub.asObservable();
+
   private static _config: AppConfig;
   static get Config(): AppConfig {
     return this._config || Config;
@@ -34,6 +38,7 @@ export class ConfigService {
     _config.isServed = true;
     _config.withError = errors;
     ConfigService._config = _config;
+    this.configSub.next(_config);
   }
 
   loadConfig(): Observable<boolean> {

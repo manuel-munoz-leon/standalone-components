@@ -1,5 +1,7 @@
 <h2>Reports</h2>
 
+<ng-container *ngIf="cache$ | async"></ng-container>
+
 <ul>
   <li>
     <a routerLink="list">List</a>

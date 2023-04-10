@@ -1,6 +1,8 @@
 <p>details works!</p>
 
-<!-- <ng-container *ngIf="notifications$ | async">
+<button (click)="addMore()">Add More</button>
+
+<ng-container *ngIf="notifications$ | async">
   <h3>
     Notifications
     <mat-icon
@@ -14,4 +16,4 @@
     <span>{{ noti.name }}</span> | <small>{{ noti.date }}</small>
     <p>{{ noti.message }}</p>
   </div>
-</ng-container> -->
+</ng-container>

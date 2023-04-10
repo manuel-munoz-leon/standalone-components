@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { map, Observable } from 'rxjs';
+import { CacheService } from '../cache.service';
 import { GenericService } from '../generic.service';
 
 type Entries = {
@@ -32,5 +33,12 @@ export class TenantsComponent {
     .fetchData<Entries>('https://api.publicapis.org/entries')
     .pipe(map((data: Entries) => data.entries.splice(0, 15)));
 
-  constructor(private genericService: GenericService) {}
+  cache$: Observable<Api[]> = this.cache
+    .getResource('https://api.publicapis.org/entries')
+    .pipe(map((data: Entries) => data.entries.splice(0, 15)));
+
+  constructor(
+    private genericService: GenericService,
+    private cache: CacheService
+  ) {}
 }
