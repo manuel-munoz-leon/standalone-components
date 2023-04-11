@@ -1,12 +1,21 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  EffectRef,
+  EnvironmentInjector,
+  OnInit,
+  computed,
+  effect,
+  inject,
+  runInInjectionContext,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { combineLatest } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
-import { Observable } from 'rxjs/internal/Observable';
-import { map } from 'rxjs/internal/operators/map';
-import { tap } from 'rxjs/internal/operators/tap';
 
+type Person = {
+  name: string;
+  lastname: string;
+};
 @Component({
   selector: 'app-signals',
   standalone: true,
@@ -17,19 +26,38 @@ import { tap } from 'rxjs/internal/operators/tap';
 export class SignalsComponent {
   counter = 0;
 
-  title1$: BehaviorSubject<string> = new BehaviorSubject('Reactive');
-  title2$: BehaviorSubject<string> = new BehaviorSubject('Programming');
+  title1$ = signal('Reactive');
+  title2$ = signal('Programming');
+  person = signal<Person>({ name: 'Manu', lastname: 'Munoz' });
+  injector = inject(EnvironmentInjector);
+  effectSig!: EffectRef;
 
-  headline$: Observable<string> = combineLatest([
-    this.title1$,
-    this.title2$,
-  ]).pipe(
-    tap(() => this.counter++),
-    map(([title1, title2]) => `${title1} ${title2}`)
-  );
+  headline = computed(() => {
+    this.counter++;
+    return `${this.title1$()} ${this.title2$()}`;
+  });
 
   changeTitle(): void {
-    this.title1$.next('Angular');
-    this.title2$.next('Singals');
+    this.title1$.set('Angular');
+    this.title2$.update((value) => `${value} with Singals`);
+    this.person.mutate((person) => {
+      person.name = 'Juan';
+    });
+  }
+
+  createEffect() {
+    runInInjectionContext(
+      this.injector,
+      () =>
+        (this.effectSig = effect(() => {
+          console.log(
+            `side effect angular signal after headline changes ${this.headline()}`
+          );
+        }))
+    );
+  }
+
+  destroyEffect() {
+    this.effectSig?.destroy();
   }
 }

@@ -1,8 +1,16 @@
-<h2>{{ headline$ | async }}</h2>
+<h2>{{ headline() }}</h2>
+<h3>{{ person() | json }}</h3>
 
 <section>
   <label>Counter: {{ counter }}</label>
   <button mat-raised-button color="primary" (click)="changeTitle()">
     Update Headline
+  </button>
+  <button mat-raised-button color="primary" (click)="createEffect()">
+    Create SideEffect
+  </button>
+
+  <button mat-raised-button color="primary" (click)="destroyEffect()">
+    Destroy Effect
   </button>
 </section>

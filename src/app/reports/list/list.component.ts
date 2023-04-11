@@ -10,6 +10,6 @@ import { ConfigService } from '../../config/config.service';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
-  config$ = this.config.config$;
+  configSignal = this.config.configSignal;
   constructor(private config: ConfigService) {}
 }
