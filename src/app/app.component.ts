@@ -27,16 +27,16 @@ export class AppComponent {
   title = 'standalone';
   counter = 0;
   mobileView$ = this.eventService.mobileView$;
-  interval = setInterval(() => this.addNotifications(), 500);
+  // interval = setInterval(() => this.addNotifications(), 500);
 
   constructor(private eventService: EventBusService) {}
 
-  addNotifications(): void {
-    console.log(this.counter);
-    this.eventService.pushNotifications(Notifications[this.counter]);
-    this.counter += 1;
-    if (this.counter >= 12) {
-      clearInterval(this.interval);
-    }
-  }
+  // addNotifications(): void {
+  //   console.log(this.counter);
+  //   this.eventService.pushNotifications(Notifications[this.counter]);
+  //   this.counter += 1;
+  //   if (this.counter >= 12) {
+  //     clearInterval(this.interval);
+  //   }
+  // }
 }

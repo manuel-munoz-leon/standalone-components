@@ -2,6 +2,7 @@ import { inject } from '@angular/core';
 import { Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { GenericService } from './generic.service';
+import { SignalsComponent } from './signals/signals.component';
 
 export const ROUTES: Routes = [
   {
@@ -24,5 +25,9 @@ export const ROUTES: Routes = [
     loadComponent: () =>
       import('./reports/reports.component').then((m) => m.ReportsComponent),
     loadChildren: () => import('./reports/reports.routes'),
+  },
+  {
+    path: 'signals',
+    component: SignalsComponent,
   },
 ];
